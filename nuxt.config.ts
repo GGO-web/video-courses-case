@@ -3,7 +3,9 @@ import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineNuxtConfig({
-  css: ['ant-design-vue/dist/antd.css', '@/assets/scss/main.scss'],
+  css: [
+    '@/assets/scss/main.scss'
+  ],
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss'
@@ -22,7 +24,6 @@ export default defineNuxtConfig({
     },
     ssr: {
       noExternal: [
-        'ant-design-vue',
         '@ant-design/icons-vue'
       ]
     }

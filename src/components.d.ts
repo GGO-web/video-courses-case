@@ -9,7 +9,13 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ACard: typeof import('ant-design-vue/es')['Card']
+    ADivider: typeof import('ant-design-vue/es')['Divider']
     AInput: typeof import('ant-design-vue/es')['Input']
+    ARate: typeof import('ant-design-vue/es')['Rate']
+    ASpin: typeof import('ant-design-vue/es')['Spin']
+    ATag: typeof import('ant-design-vue/es')['Tag']
+    ATypographyTitle: typeof import('ant-design-vue/es')['TypographyTitle']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

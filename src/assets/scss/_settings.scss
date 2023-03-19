@@ -13,7 +13,7 @@ $minMobile: 375;
 $maxWidth: 1920;
 
 // Width of container
-$maxWidthContainer: 1290;
+$maxWidthContainer: 1600;
 
 // Container padding left + right
 $containerPadding: 30;
@@ -51,7 +51,8 @@ body {
   }
 
   @if $containerPadding>0 {
-    padding: 0 rem(math.div($containerPadding, 2));
+    padding-left: rem(math.div($containerPadding, 2));
+    padding-right: rem(math.div($containerPadding, 2));
   }
 }
 
