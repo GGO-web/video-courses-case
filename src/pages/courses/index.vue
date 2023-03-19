@@ -19,12 +19,33 @@
           <a-typography-title :level="3">
             {{ course.title }}
           </a-typography-title>
-          <p>{{ course.description }}</p>
+          <a-typography-text class="block mb-3">
+            {{ course.description }}
+          </a-typography-text>
 
-          <div class="course__skills flex flex-wrap gap-2 mb-3">
-            <a-tag v-for="skill in course.meta.skills" :key="skill" color="blue">
-              {{ skill }}
-            </a-tag>
+          <div class="course__start mb-3">
+            <div class="course__date flex justify-between text-green-600">
+              <span>Start date: </span>
+              <date>
+                {{ getCourseFormattedDate(course.launchDate) }}
+              </date>
+            </div>
+            <div class="course__duration flex justify-between text-blue-600">
+              <span>Duration: </span>
+              <span>{{ getCourseDuration(course.duration) }}</span>
+            </div>
+          </div>
+
+          <div class="course__skills mb-3">
+            <strong class="text-blue-400 block mb-2">
+              Skills:
+            </strong>
+
+            <div class="course__skills-tags flex flex-wrap gap-2 ">
+              <a-tag v-for="skill in course.meta.skills" :key="skill" class="flex-auto text-center" color="blue">
+                {{ skill }}
+              </a-tag>
+            </div>
           </div>
 
           <div class="course__rating grid">
@@ -54,6 +75,24 @@ onBeforeMount(() => {
 
 const getCoursePreviewImage = (previewImageLink: string) => {
   return `${previewImageLink}/cover.webp`
+}
+
+const getCourseDuration = (duration: number) => {
+  const hours = duration / 60
+  const roundedHours = Math.floor(hours)
+
+  const minutes = duration - roundedHours * 60
+
+  return `${roundedHours} hours ${minutes} minutes`
+}
+
+const getCourseFormattedDate = (date: string) => {
+  return new Intl.DateTimeFormat('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(new Date(date))
 }
 
 </script>
