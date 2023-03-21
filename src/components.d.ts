@@ -18,7 +18,10 @@ declare module '@vue/runtime-core' {
     ATag: typeof import('ant-design-vue/es')['Tag']
     ATypographyText: typeof import('ant-design-vue/es')['TypographyText']
     ATypographyTitle: typeof import('ant-design-vue/es')['TypographyTitle']
+    HeartOutlined: typeof import('@ant-design/icons-vue')['HeartOutlined']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StarOutlined: typeof import('@ant-design/icons-vue')['StarOutlined']
+    StepForwardOutlined: typeof import('@ant-design/icons-vue')['StepForwardOutlined']
   }
 }

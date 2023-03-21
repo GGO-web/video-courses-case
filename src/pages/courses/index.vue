@@ -64,8 +64,10 @@
               </div>
             </div>
 
-            <div class="course__rating grid">
-              <a-rate :count="5" :value="3" disabled />
+            <div class="course__rating">
+              <span class="mr-3">{{ course.rating }}</span>
+
+              <a-rate v-model:value="course.rating" character="✰" allow-half disabled />
             </div>
           </div>
         </div>
@@ -73,6 +75,7 @@
     </div>
 
     <a-pagination
+      v-if="courses.length > 0"
       class="pagination"
       :current="pagination.current"
       :page-size="pagination.pageSize"
@@ -153,6 +156,10 @@ const getCourseFormattedDate = (date: string) => {
     &-count {
       @apply inline-flex place-content-center flex-wrap bg-amber-400 rounded-full min-w-[32px] h-[32px];
     }
+  }
+
+  .course__rating {
+    @apply inline-flex items-center;
   }
 
   .pagination {

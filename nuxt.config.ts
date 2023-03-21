@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     plugins: [
       Components({
         resolvers: [AntDesignVueResolver({
+          importStyle: true,
           resolveIcons: true
         })]
       })
