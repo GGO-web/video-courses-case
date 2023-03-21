@@ -70,6 +70,14 @@
               <a-rate v-model:value="course.rating" character="✰" allow-half disabled />
             </div>
           </div>
+
+          <div class="course__video mt-3">
+            <a-typography-title :level="4" class="mb-3">
+              Short course preview:
+            </a-typography-title>
+
+            <video-player-custom :src="course.meta.courseVideoPreview.link" :poster="getCoursePreviewImage(course.previewImageLink)" />
+          </div>
         </div>
       </a-card>
     </div>
@@ -105,6 +113,8 @@ const paginatedCourses = computed(() => {
 const getCourses = async () => {
   const coursesPreview = await CoursesService.getCourses()
   courses.value = coursesPreview
+
+  console.log(courses.value[0])
 }
 
 onBeforeMount(() => {

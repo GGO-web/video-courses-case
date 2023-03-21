@@ -4,11 +4,15 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 export default defineNuxtConfig({
   css: [
-    '@/assets/scss/main.scss'
+    '@/assets/scss/main.scss',
+    'video.js/dist/video-js.css'
   ],
   modules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/tailwindcss'
+  ],
+  plugins: [
+    '~/plugins/videoPlayer.ts'
   ],
   srcDir: 'src/',
   vite: {
