@@ -1,3 +1,3 @@
 import { Course } from './course.interface'
 
-export type Courses = Course[];
+export type Courses = Omit<Course, 'lessons'>[];

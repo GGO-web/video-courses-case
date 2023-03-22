@@ -1,3 +1,5 @@
+import { Lesson } from './courseLesson.interface'
+
 export interface Course {
   id: string;
   title: string;
@@ -19,4 +21,5 @@ export interface Course {
       previewImageLink: string;
     };
   };
+  lessons?: Lesson[];
 }
