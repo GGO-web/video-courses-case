@@ -27,13 +27,14 @@
               {{ getCourseFormattedDate(course.launchDate) }}
             </date>
           </div>
+
           <div class="course__duration flex justify-between text-blue-600">
             <span>Duration: </span>
-            <span>{{ getCourseDuration(course.duration) }}</span>
+            <span>{{ getFormattedDuration(course.duration) }}</span>
           </div>
         </div>
 
-        <div class="course__lessons">
+        <div v-if="!lessons" class="course__lessons">
           <strong class="mr-3">
             Lessons:
           </strong>
@@ -62,7 +63,7 @@
         </div>
       </div>
 
-      <div class="course__video mt-3">
+      <div v-if="videoPreview" class="course__video mt-3">
         <a-typography-title :level="4" class="mb-3">
           Short course preview:
         </a-typography-title>
@@ -70,32 +71,39 @@
         <video-player-custom :src="course.meta.courseVideoPreview.link" :poster="getCoursePreviewImage(course.previewImageLink)" />
       </div>
     </div>
+
+    <div v-if="course.lessons" class="course_lessons mt-3 p-3">
+      <a-typography-title :level="2" class="mb-3">
+        Lessons:
+      </a-typography-title>
+
+      <a-collapse v-model:activeKey="activeLesson" class="course__lessons-list" accordion>
+        <a-collapse-panel v-for="(lesson, i) in course.lessons" :key="i" :header="lesson.title" :collapsible="isLockedLesson(lesson)">
+          <lesson-item :lesson="lesson" />
+
+          <template v-if="isLockedLesson(lesson)==='disabled'" #extra>
+            <LockOutlined />
+          </template>
+        </a-collapse-panel>
+      </a-collapse>
+    </div>
   </a-card>
 </template>
 
 <script lang="ts" setup>
 import { defineProps } from 'vue'
 
+import { Lesson } from '../../types/courses/courseLesson.interface'
+import { getCoursePreviewImage } from '~/helpers/getCoursePreviewImage'
+import { getFormattedDuration } from '~/helpers/getFormattedDuration'
+
 import { Course } from '@/types/courses/course.interface'
 
-const props = defineProps<{ course: Course }>()
+const props = defineProps<{ course: Course, videoPreview: boolean, lessons: boolean}>()
 
-const { course } = toRefs(props)
+const { course, videoPreview = true, lessons = false } = toRefs(props)
 
-console.log(course)
-
-const getCoursePreviewImage = (previewImageLink: string) => {
-  return `${previewImageLink}/cover.webp`
-}
-
-const getCourseDuration = (duration: number) => {
-  const hours = duration / 60
-  const roundedHours = Math.floor(hours)
-
-  const minutes = duration - roundedHours * 60
-
-  return `${roundedHours} hours ${minutes} minutes`
-}
+const activeLesson = ref(['0'])
 
 const getCourseFormattedDate = (date: string) => {
   return new Intl.DateTimeFormat('en-US', {
@@ -104,6 +112,10 @@ const getCourseFormattedDate = (date: string) => {
     month: 'long',
     day: 'numeric'
   }).format(new Date(date))
+}
+
+const isLockedLesson = (lesson: Lesson) => {
+  return lesson.status === 'locked' ? 'disabled' : 'header'
 }
 
 </script>

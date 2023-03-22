@@ -1,7 +1,12 @@
 <template>
-  <div class="container">
+  <div class="container py-3 flex flex-col">
     <a-typography-title>Course preview</a-typography-title>
-    <course-item :course="course" />
+
+    <div class="course-preview" :class="['justify-center', 'items-center']">
+      <a-spin v-if="!course" size="large" />
+
+      <course-item v-if="course" :course="course" :video-preview="false" :lessons="true" />
+    </div>
   </div>
 </template>
 
@@ -18,3 +23,9 @@ onBeforeMount(async () => {
 })
 
 </script>
+
+<style scoped>
+.course-preview {
+  @apply flex flex-auto;
+}
+</style>

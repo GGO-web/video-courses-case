@@ -33,6 +33,11 @@ export default defineNuxtConfig({
       ]
     }
   },
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => ['c'].includes(tag)
+    }
+  },
   tailwindcss: {
     cssPath: '~/assets/scss/tailwind.scss'
   }
