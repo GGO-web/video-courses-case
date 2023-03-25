@@ -64,17 +64,17 @@
       </div>
 
       <div v-if="videoPreview" class="course__video mt-3">
-        <a-typography-title :level="4" class="mb-3">
+        <a-typography-title :level="3" class="mb-3">
           Short course preview:
         </a-typography-title>
 
-        <video-player-custom :src="course.meta.courseVideoPreview.link" :poster="getCoursePreviewImage(course.previewImageLink)" />
+        <video-player-custom :src="course.meta.courseVideoPreview.link" :poster="getCoursePreviewImage(course.previewImageLink)" :hoverable="videoPreview" />
       </div>
     </div>
 
     <div v-if="course.lessons" class="course_lessons mt-3 p-3">
       <a-typography-title :level="2" class="mb-3">
-        Lessons:
+        Course lessons:
       </a-typography-title>
 
       <a-collapse v-model:activeKey="activeLesson" class="course__lessons-list" accordion>
